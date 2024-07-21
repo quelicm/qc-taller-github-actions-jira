@@ -14,9 +14,11 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
-          github.rest.issues.createComment({
-              issue_number: context.issue.number,
+          github.rest.pulls.createReviewComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
+              pull_number: context.repo.pull_number,
+              commit_id: context.repo.commit_id,
+              path: context.repo.path,
               body: 'Esta PR está lista para ser validada por QA. 🔍' 
             })
