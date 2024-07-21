@@ -1,0 +1,16 @@
+{
+  "name": "qc-taller-github-actions-jira",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "pnpm dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "type": "module"
+}
