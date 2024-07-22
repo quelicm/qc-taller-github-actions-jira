@@ -1,4 +1,4 @@
-## [Preview link]
+## [Preview link](https://antares-blog-staging-pr-${{ github.event.number }}.azurewebsites.net)
 
 - ✅ Your changes have been deployed to the preview site. The preview site will update as you add more commits to this branch.
 - The preview site shows any future-dated articles. Don't worry, if you are publishing a future-dated article, it will not show on the production site until the file's specified date.
