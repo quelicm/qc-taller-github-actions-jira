@@ -14,4 +14,4 @@ jobs:
       uses: mshick/add-pr-comment@v2
       with:
         message-path: | 
-          messages/message-cr-ok.md
+          message-cr-ok.md
