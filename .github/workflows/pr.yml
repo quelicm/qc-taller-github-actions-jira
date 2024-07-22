@@ -14,7 +14,7 @@ jobs:
       uses: mshick/add-pr-comment@v2
       with:
         message-path: |
-             '.message-cr-ok.md'
+             'message-cr-ok.md'
         allow-repeats: true
         # message: |
         #     **Howdie!**
