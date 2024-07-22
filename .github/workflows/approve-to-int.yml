@@ -1,0 +1,46 @@
+name: Add QA Validation Comment
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  merge:
+    name: Merge into stage
+    if: github.event.review.state == 'approved' && contains(github.event.pull_request.labels.*.name, 'QA' )
+    runs-on: ubuntu-latest
+    steps:
+      # Environment variables
+      - name: Extract branch name
+        run: echo "BASE_BRANCH=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
+
+      - name: Extract branch URI
+        run: echo "BASE_BRANCH_URI=${BASE_BRANCH/\#/%2F%23} >> $GITHUB_ENV
+
+      - name: Debug
+        run: |
+          echo $BASE_BRANCH
+          echo $BASE_BRANCH_URI
+      
+      # Merge step
+      - name: Merge ${{ env.BASE_BRANCH }} into stage
+        uses: octokit/request-action@v2.x
+        id: merge
+        with:
+          route: POST /repos/:repository/merges
+          repository: ${{ github.repository }}
+          ref: ${{ env.BASE_BRANCH }}
+          head: ${{ env.BASE_BRANCH }}
+          base: stage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+      - name: Add comment to PR
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+              ## PR has been merged into stage
+
+              - ✅ Your can review the changes on the [stage site](https://antares-blog-stage-${{ env.BASE_BRANCH_URI }}.azurewebsites.net)
+          
