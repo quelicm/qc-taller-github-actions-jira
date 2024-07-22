@@ -13,7 +13,7 @@ jobs:
     - name: Add comment to PR
       uses: mshick/add-pr-comment@v2
       with:
-        message-path: messages/message-cr-ok-comment.md
+        message-path: messages/message-cr-ok.md
         # message: |
         #     **Howdie!**
         # message-failure: |
