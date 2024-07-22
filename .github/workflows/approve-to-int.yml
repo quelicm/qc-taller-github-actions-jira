@@ -1,6 +1,7 @@
-name: Add QA Validation Comment
+name: When approve merge to Integration
 
 on:
+  workflow_dispatch: 
   pull_request_review:
     types: [submitted]
 
