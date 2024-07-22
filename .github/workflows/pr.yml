@@ -17,3 +17,5 @@ jobs:
             **Howdie!**
         message-failure: |
             Uh oh!
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        allow-repeats: true
