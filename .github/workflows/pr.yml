@@ -13,7 +13,8 @@ jobs:
     - name: Add comment to PR
       uses: mshick/add-pr-comment@v2
       with:
-        message-path: .github/workflows/messages/message-cr-ok.md
+        message-path: |
+             './messages/message-cr-ok.md'
         allow-repeats: true
         # message: |
         #     **Howdie!**
