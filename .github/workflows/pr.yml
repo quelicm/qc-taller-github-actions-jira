@@ -13,9 +13,10 @@ jobs:
     - name: Add comment to PR
       uses: mshick/add-pr-comment@v2
       with:
-        message: |
-            **Howdie!**
-        message-failure: |
-            Uh oh!
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        allow-repeats: true
+        message-path: messages/message-cr-ok-comment.md
+        # message: |
+        #     **Howdie!**
+        # message-failure: |
+        #     Uh oh!
+        # repo-token: ${{ secrets.GITHUB_TOKEN }}
+        # allow-repeats: true
