@@ -32,10 +32,9 @@ jobs:
           cache: "pnpm"
      
       - name: Install and Build 🔧
-        working-directory: apps/blog
         run: |
             pnpm install
-            pnpm run build
+            pnpm --filter apps/blog run build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.0
