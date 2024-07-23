@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   build:
-    name: Build & deploy
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
@@ -37,8 +37,19 @@ jobs:
             pnpm --filter common run build
             pnpm --filter blog run build
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.4.0
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          branch: gh-pages
-          folder: apps/blog/dist
+          path: "apps/blog/dist/"
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
