@@ -34,7 +34,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
             pnpm install
-            pnpm --filter apps/blog run build
+            pnpm --filter blog run build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.4.0
