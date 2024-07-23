@@ -34,6 +34,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
             pnpm install
+            pnpm --filter common run build
             pnpm --filter blog run build
 
       - name: Deploy 🚀
