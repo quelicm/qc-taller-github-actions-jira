@@ -12,6 +12,8 @@ env:
 
 jobs:
   merge:
+    - name: Debug
+      run: echo "$GITHUB_EVENT"
     name: Merge into stage
     if: github.event.review.state == 'approved' && contains(github.event.pull_request.labels.*.name, 'QA' )
     runs-on: ubuntu-latest
