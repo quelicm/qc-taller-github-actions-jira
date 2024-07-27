@@ -3,6 +3,7 @@ name: Notificar Aprobación de PR
 on:
   pull_request_review:
     types: [submitted]
+  workflow_dispatch:
 
 jobs:
   notificar_aprobacion:
