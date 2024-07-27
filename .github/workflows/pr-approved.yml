@@ -4,12 +4,16 @@ on:
   pull_request_review:
     types: [submitted]
   workflow_dispatch:
+    inputs:
+        pull-request:
+            description: Pull Request Number
+            required: false
 
 jobs:
   notificar_aprobacion:
     name: Enviar Notificación de Aprobación
-    runs-on: ubuntu-latest
     if: github.event.review.state == 'approved'
+    runs-on: ubuntu-latest
 
     steps:
       - name: Obtener Información de la PR
