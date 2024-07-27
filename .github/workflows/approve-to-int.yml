@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Variables
-        run: echo "$GITHUB_EVENT"
+        run: echo ${{github.event.review.state}}
   merge:
     name: Merge into stage
     if: github.event.review.state == 'approved' && contains(github.event.pull_request.labels.*.name, 'QA' )
