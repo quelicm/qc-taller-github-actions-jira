@@ -5,6 +5,11 @@ on:
   pull_request_review:
     types: [submitted]
 
+concurrency: integration
+
+env: 
+  BASE_BRANCH:
+
 jobs:
   merge:
     name: Merge into stage
