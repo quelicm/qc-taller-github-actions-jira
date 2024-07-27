@@ -5,6 +5,15 @@ on:
     types: [submitted]
 
 jobs:
+  submitted:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This PR was submitted"
+  approved:
+    if: github.event.review.state == 'APPROVED'
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This PR was approved"
   check-state:
     if: github.event.review.state == 'approved' && github.event.pull_request.base.ref == 'master'
     runs-on: ubuntu-latest
