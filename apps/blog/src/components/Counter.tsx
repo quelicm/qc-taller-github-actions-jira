@@ -22,6 +22,7 @@ export default function Counter({
 				<p>{isBlank("") ? "package isBlank works!" : "isBlank does not work!"}</p>
 			</div>
 			<div className="counter-message">{children}</div>
+			<p>Prueba PR: 1</p>
 		</>
 	);
 }
