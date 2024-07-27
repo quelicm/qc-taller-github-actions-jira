@@ -19,8 +19,8 @@ jobs:
         run: echo "hola  ${{github.event.pull_request}}  ${{github.event.review.state}}" 
   merge:
     name: Merge into stage
-    if: github.event.review.state == 'approved' && contains(github.event.pull_request.labels.*.name, 'QA' )
     runs-on: ubuntu-latest
+    if: github.event.review.state == 'approved' && contains(github.event.pull_request.labels.*.name, 'QA' )
     steps:
       # Environment variables
       - name: Extract branch name
