@@ -12,7 +12,7 @@ on:
 jobs:
   notificar_aprobacion:
     name: Enviar Notificación de Aprobación
-    if: github.event.review.state == 'approved'
+    if: github.event.review.state == 'APPROVED'
     runs-on: ubuntu-latest
 
     steps:
