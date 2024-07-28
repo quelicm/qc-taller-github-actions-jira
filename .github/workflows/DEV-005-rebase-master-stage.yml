@@ -1,0 +1,23 @@
+name: DEV-005 - Rebase Stage on Master Merge
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  rebase-stage:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0  # Fetch all history for accurate rebasing
+
+    - name: Rebase stage branch
+      run: |
+        git config --global user.name "GitHub Action"
+        git config --global user.email "action@github.com"
+        git checkout stage
+        git rebase origin/master
+        git push --force-with-lease # Use force-with-lease to avoid overwriting others' work
