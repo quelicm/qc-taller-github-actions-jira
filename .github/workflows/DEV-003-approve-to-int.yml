@@ -26,13 +26,9 @@ jobs:
       - name: Extract branch name
         run: echo "BASE_BRANCH=${{ github.event.pull_request.head.ref }}" >> $GITHUB_ENV
 
-      - name: Extract branch URI
-        run: echo "BASE_BRANCH_URI=${BASE_BRANCH/\#/%2F%23} >> $GITHUB_ENV
-
       - name: Debug
         run: |
           echo $BASE_BRANCH
-          echo $BASE_BRANCH_URI
       
       # Merge step
       - name: Merge ${{ env.BASE_BRANCH }} into stage
@@ -55,6 +51,7 @@ jobs:
               ## PR has been merged into stage
 
               - ✅ Your can review the changes on the [stage site](https://antares-blog-stage-${{ env.BASE_BRANCH_URI }}.azurewebsites.net)
+              - ✅ Your can review the changes on the [stage site]()
 
   deploy:
     name: Deploy to stage
