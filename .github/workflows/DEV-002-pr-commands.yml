@@ -1,0 +1,40 @@
+name: DEV-002 - Aprobar PR con comando
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+    approve:
+        name: Command /approve
+        runs-on: ubuntu-latest
+        if: contains(github.event.comment.body, '/approve') && github.event.issue.pull_request != null
+
+        steps:
+            - name: Approve PR
+              uses: octokit/request-action@v2.x
+              with:
+                route: POST /repos/:repository/pulls/:pull_number/reviews
+                repository: ${{ github.repository }}
+                pull_number: ${{ github.event.issue.number }}
+                event: "APPROVE"
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # - name: Approve PR
+            #   uses: actions/github-script@v3
+            #   with:
+            #       github-token: ${{ secrets.GITHUB_TOKEN }}
+            #       script: |
+            #           github.pulls.createReview({
+            #               owner: context.repo.owner,
+            #               repo: context.repo.repo,
+            #               pull_number: context.payload.issue.number,
+            #               event: 'APPROVE'
+            #           })
+            - name: Add comment to PR
+              uses: mshick/add-pr-comment@v2
+              with:
+                  message: |
+                      ## PR has been approved
+                      - ✅ Your PR has been approved. You can now merge it.
+                      > *This is an automated message.*
+

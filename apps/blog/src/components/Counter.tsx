@@ -2,13 +2,16 @@ import { useState } from 'react';
 import './Counter.css';
 import { isBlank } from 'common';
 
-export default function Counter({
+
+interface  CounterProps {
+	children: JSX.Element
+	count: number
+}
+
+export const Counter: React.FC<CounterProps> = ({
 	children,
 	count: initialCount,
-}: {
-	children: JSX.Element;
-	count: number;
-}) {
+}) =>  {
 	const [count, setCount] = useState(initialCount);
 	const add = () => setCount((i) => i + 1);
 	const subtract = () => setCount((i) => i - 1);
@@ -22,6 +25,7 @@ export default function Counter({
 				<p>{isBlank("") ? "package isBlank works!" : "isBlank does not work!"}</p>
 			</div>
 			<div className="counter-message">{children}</div>
+			<p>Prueba PR: 12</p>
 		</>
 	);
 }

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm dev"
+    "dev": "pnpm dev",
+    "build": "pnpm run --parallel build"
   },
   "keywords": [],
   "author": "",

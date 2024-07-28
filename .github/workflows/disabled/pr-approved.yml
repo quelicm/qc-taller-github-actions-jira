@@ -1,0 +1,52 @@
+name: Notificar Aprobación de PR
+
+on:
+  pull_request_review:
+    types: [submitted]
+  workflow_dispatch:
+    inputs:
+        pull-request:
+            description: Pull Request Number
+            required: false
+
+jobs:
+  notificar_aprobacion:
+    name: Enviar Notificación de Aprobación
+    if: github.event.review.state == 'APPROVED'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Obtener Información de la PR
+        id: pr_info
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: pullRequest } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+            
+            const reviews = await github.paginate(github.rest.pulls.listReviews, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+
+            const approvedReviews = reviews.filter(review => review.state === 'APPROVED');
+
+            core.setOutput('total_approvals', approvedReviews.length.toString());
+
+      - name: Enviar Notificación
+        if: steps.pr_info.outputs.total_approvals >= 1
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: '🎉 ¡Esta PR ha sido aprobada! Total de aprobaciones: ${{ steps.pr_info.outputs.total_approvals }}'
+            });
