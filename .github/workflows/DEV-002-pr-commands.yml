@@ -1,4 +1,4 @@
-name: Aprobar PR con comando
+name: DEV-002 - Aprobar PR con comando
 
 on:
   issue_comment:
