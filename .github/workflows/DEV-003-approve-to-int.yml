@@ -3,11 +3,6 @@ name: DEV-003 - When approve merge to Integration
 on:
   pull_request_review:
     types: [submitted]
-  workflow_dispatch:
-      inputs:
-          pull-request:
-              description: Pull Request Number
-              required: false
 
 concurrency: integration
 
@@ -24,6 +19,7 @@ jobs:
   merge:
     name: Merge into stage
     if: github.event.review.state == 'APPROVED' && contains(github.event.pull_request.labels.*.name, 'QA' )
+    needs: debug
     runs-on: ubuntu-latest
     steps:
       # Environment variables
@@ -54,5 +50,12 @@ jobs:
           message: |
               ## PR has been merged into stage
 
+              - ✅ Your can review the changes on the [stage site](https://antares-blog-stage-${{ env.BASE_BRANCH_URI }}.azurewebsites.net)
               - ✅ Your can review the changes on the [stage site]()
+
+  deploy:
+    name: Deploy to stage
+    uses: ./.github/workflows/DEV-004 - deploy-gh-pages.yml
+    needs: merge
+    secrets: inherit
           

@@ -6,6 +6,8 @@ on:
 
   workflow_dispatch:
 
+  workflow_call:
+
 
 concurrency:
   group: audo-deploy-${{ github.ref }}
@@ -24,6 +26,8 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
+        with:
+          ref: stage
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
