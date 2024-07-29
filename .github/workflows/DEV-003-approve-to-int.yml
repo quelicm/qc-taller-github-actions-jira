@@ -50,7 +50,6 @@ jobs:
           message: |
               ## PR has been merged into stage
 
-              - ✅ Your can review the changes on the [stage site](https://antares-blog-stage-${{ env.BASE_BRANCH_URI }}.azurewebsites.net)
               - ✅ Your can review the changes on the [stage site]()
 
   deploy:
@@ -61,6 +60,7 @@ jobs:
 
   notification:
     runs-on: ubuntu-latest
+    needs: deploy
     steps:
     - name: Add comment to PR
       uses: mshick/add-pr-comment@v2
