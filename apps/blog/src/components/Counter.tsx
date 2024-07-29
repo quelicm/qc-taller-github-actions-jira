@@ -25,7 +25,7 @@ export const Counter: React.FC<CounterProps> = ({
 				<p>{isBlank("") ? "package isBlank works!" : "isBlank does not work!"}</p>
 			</div>
 			<div className="counter-message">{children}</div>
-			<p>Prueba PR: 17</p>
+			<p>Prueba PR: 18</p>
 		</>
 	);
 }
