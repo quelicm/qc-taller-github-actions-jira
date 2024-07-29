@@ -1,4 +1,4 @@
-export default async ({ github, context }) => {
+module.exports = async ({ github, context }) => {
     const labels = context.payload.pull_request.labels.map(label => label.name);
     console.log(`PR labels: ${labels}`);
 
