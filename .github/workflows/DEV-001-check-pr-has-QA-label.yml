@@ -23,14 +23,15 @@ jobs:
     - name: Add comment to PR
       uses: mshick/add-pr-comment@v2
       with:
-        # message-path: |
-        #      message-cr-ok.txt
-        # allow-repeats: true
-        message: |
-            ## [Preview link](https://antares-blog-staging-pr-${{ github.event.number }}.azurewebsites.net)
+        message-path: |
+            `${process.env.GITHUB_WORKSPACE}/.github/workflows/messages/message-cr-ok.txt`
+             
+        allow-repeats: true
+        # message: |
+        #     ## [Preview link](https://antares-blog-staging-pr-${{ github.event.number }}.azurewebsites.net)
 
-            - ✅ PR creada correctamente se puede revisar ya a nivel de código 
-            > *This is an automated message.*
+        #     - ✅ PR creada correctamente se puede revisar ya a nivel de código 
+        #     > *This is an automated message.*
         # message-failure: |
         #     Uh oh!
         # repo-token: ${{ secrets.GITHUB_TOKEN }}
