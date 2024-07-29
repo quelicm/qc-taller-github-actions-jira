@@ -7,6 +7,10 @@ on:
   workflow_dispatch:
 
   workflow_call:
+    outputs:
+      url:
+        description: "The first job output"
+        value: ${{ jobs.deploy.outputs.url }}
 
 
 concurrency:
@@ -58,14 +62,9 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-      - name: Add comment to PR
-        uses: mshick/add-pr-comment@v2
-        with:
-          message: |
-              ## PR has been deployed
-
-              - ✅ Your can review the changes on the [stage site](${{ steps.deployment.outputs.page_url }})
