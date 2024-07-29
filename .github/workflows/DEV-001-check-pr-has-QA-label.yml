@@ -24,7 +24,7 @@ jobs:
       uses: mshick/add-pr-comment@v2
       with:
         message-path: |
-            `${process.env.GITHUB_WORKSPACE}/.github/workflows/messages/message-cr-ok.txt`
+            messages/message-cr-ok.txt
              
         allow-repeats: true
         # message: |
