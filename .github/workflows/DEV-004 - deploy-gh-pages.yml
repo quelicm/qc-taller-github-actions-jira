@@ -62,11 +62,11 @@ jobs:
     environment:
       name: github-pages
     outputs:
-      url: ${{ steps.step1.outputs.url }}
+      url: ${{ steps.output.outputs.url }}
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        steps:
-            - id: step1
-            run: echo "url=${{ steps.deployment.outputs.page_url }}" >> $GITHUB_OUTPUT
+      - name: set output
+        id: output
+        run: echo "url=${{ steps.deployment.outputs.page_url }}" >> $GITHUB_OUTPUT
