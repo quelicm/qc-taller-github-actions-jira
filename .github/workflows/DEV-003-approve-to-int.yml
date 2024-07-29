@@ -75,5 +75,5 @@ jobs:
           message: |
               ## PR has been deployed
 
-              - ✅ Your can review the changes on the [stage site](${{ needs.merge.outputs.url }})
+              - ✅ Your can review the changes on the [stage site](${{ needs.deploy.outputs.url }})
           
